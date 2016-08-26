@@ -293,6 +293,8 @@ public class ArmSwinger : MonoBehaviour {
 
 	// Camera Rig scaling
 	private float cameraRigScaleModifier = 1.0f;
+
+	public float cola_movement = 0f;
 	
 	/****** INITIALIZATION ******/
 	void Awake() {
@@ -380,7 +382,11 @@ public class ArmSwinger : MonoBehaviour {
 			!rewindThisFrame &&
 			!armSwingingPaused &&
 			!rewindInProgress) {
-			transform.position += variableArmSwingMotion();
+//			transform.position += variableArmSwingMotion();
+//			Vector3 vasm = variableArmSwingMotion();
+//			Debug.Log (vasm);
+			cola_movement += variableArmSwingMotion().z;
+			Debug.Log ("当前移动：" + cola_movement);
 		}
 
 		// Save the current controller positions for next frame
@@ -399,9 +405,9 @@ public class ArmSwinger : MonoBehaviour {
 		}
 
 		// Adjust the camera rig height, and prevent climbing/falling as configured
-		if (!wallClipThisFrame && !rewindThisFrame && !outOfBounds) {
-			adjustCameraRig();
-		}
+//		if (!wallClipThisFrame && !rewindThisFrame && !outOfBounds) {
+//			adjustCameraRig();
+//		}
 
 		// Save this Time.deltaTime for next frame (inertia simulation)
 		previousTimeDeltaTime = Time.deltaTime;
